@@ -1,0 +1,10 @@
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\bin\Esys_RDclient_app.dll.config
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\bin\Esys_RDclient_app.dll
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\bin\Esys_RDclient_app.pdb
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\Interop.CERTENROLLLib.dll
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\RDS Web App.csproj.ResolveComReference.cache
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\Esys_RDclient_app.dll
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\Esys_RDclient_app.pdb
+D:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\RDS Web App.csprojResolveAssemblyReference.cache
+E:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\Interop.CERTENROLLLib.dll
+E:\Visual studio workspace\Esys_RDclient_app\Esys_RDclient_app\obj\Debug\RDS Web App.csproj.ResolveComReference.cache

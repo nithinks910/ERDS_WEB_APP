@@ -1,0 +1,1114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RD Service WEB</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        fieldset {
+            border: 1px solid #999;
+            padding: 10px;
+        }
+
+        .divider {
+            width: 1px;
+            height: auto;
+            display: inline-block;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+   
+</head>
+<body >
+    <!-- navbar -->
+    <nav class="navbar navbar-light" style="background-color: #428bca;">
+        <div style="color:white; text-align:center">
+            <h2><b>EVOLUTE RD SERVICE WEB</b></h2>
+        </div>
+    </nav><!-- navbar End -->
+
+    <div class="container">
+        <div class="pidopts">
+        <!-- pid options -->
+            <div class="panel-group col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="text-align:center;"><b>PID Options</b></div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="panel-body">
+                                <!--<select class="form-control" id="rdslist">
+                                    <option value="" disabled selected>RD Service</option>
+                                    <option id="erds" value="erds"></option>
+                                </select>&nbsp;-->
+                                <!--<input type="text" class="form-control" id="env" placeholder="ENV" value="" maxlength="2" />&nbsp;-->
+                                <input type="text" class="form-control" id="fcount" placeholder="FCOUNT" value="" maxlength="2" />&nbsp;
+                                <select class="form-control" id="ftype">
+                                    <!--<option value="" disabled selected>FTYPE</option>-->
+                                    <option value="0">FMR</option>
+                                    <!--<option value="1">FIR</option>-->
+                                </select>&nbsp;
+                                <select class="form-control" id="format">
+                                    <option value="" disabled selected>FORMAT</option>
+                                    <option value="0">XML</option>
+                                    <option value="1">PROTOBUF</option>
+                                </select>&nbsp;
+                                <input type="text" class="form-control" id="wadh" placeholder="WADH" value="">
+                                &nbsp;
+                                <input type="text" class="form-control" id="pidver" placeholder="PID VERSION" value="">
+                                &nbsp;
+                                <input type="text" class="form-control" id="otp" placeholder="OTP" value="">
+                                &nbsp;
+                                <input type="text" class="form-control" id="timeout" placeholder="TIMEOUT" value="">
+                                &nbsp;
+                                <button type="button" class="btn-primary form-control" id="capture" onclick="Capture();">CAPTURE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Get OTP-->
+                <!--<div class="panel-group" id="getotp">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" style="text-align:center;"><b>Generate OTP</b></div>
+                        <div class="panel-body">
+                            <input type="text" class="form-control" id="otpuidno" placeholder="Enter Aadhar No" maxlength="18" value="" />
+                            <span id="errfn" style="color:#f44336;font-size: 12px;"></span>
+                            &nbsp;
+                            <button type="button" class="btn-primary form-control" id="getotpsubmit" onclick="getotp();">GET OTP</button>&nbsp;
+                            <p id="errmsggetotp" style="color:#f44336;font-size: 12px;"></p>
+                            <p id="succmsggetotp" style="color: #4CAF50; font-size: 12px;"></p>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+
+        <div class="col-sm-4" id="rdauth">
+            <!-- Token entry-->
+            <div class="panel-group" id="tokenentry">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="text-align:center;"><b>Device Register OTP</b></div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="Otp" placeholder="Enter OTP" maxlength="18" value="" />
+                        <span id="errfn" style="color:#f44336;font-size: 12px;"></span>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="otpsubmit" onclick="Otpreg();">SUBMIT</button>&nbsp;
+                        <p id="errorMessage" style="color:#f44336;font-size: 12px;"></p>
+                        <p id="successMessage" style="color: #4CAF50; font-size: 12px;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RDService -->
+            <div class="panel-group" id="rdservice">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading" style="text-align:center;"><b>RD Service</b></div>
+                    <div class="panel-body">
+                        <button type="button" class="btn-primary  form-control" id="rdsbtn" onclick="rdservice();">RD Service</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary  form-control" id="info" onclick="deviceinfo();">DEVICE INFO</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authenticate -->
+            <div class="panel panel-primary" id="auth">
+                <div class="panel-heading" style="text-align:center;"><b>Authenticate</b></div>
+                <div class="panel-body">
+                    <input type="number" class="form-control" id="aadharno" placeholder="Enter Aadhar No" maxlength="12" value="" />
+                    <span id="uidnoerr" style="color:#f44336;font-size: 12px;"></span>
+                    &nbsp;
+                    <button type="button" class="btn-primary form-control" id="aadnosub" onclick="authenticate();">AUTHENTICATE</button>
+                    &nbsp;
+                    <p id="errorMessage" style="color:#f44336;font-size: 12px;"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Printer -->
+        <div class="col-sm-4" id="print">
+            <div class="panel-group">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading" style="text-align:center;"><b>Printer</b></div>
+                    <div class="panel-body">
+                        <button type="button" class="btn-primary form-control" id="testprint" onclick="testprint();">TEST PRINT</button>
+                        &nbsp;
+                        <textarea class="form-control" id="bmpprintip" rows="4" placeholder="BMP Here..."></textarea>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="bmpprint" onclick="bmpprint();">BMP PRINT</button>
+                        &nbsp;
+                        <textarea class="form-control" id="txtprintip" rows="4" placeholder="Text Here..."></textarea>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="textprint" onclick="textprint();">TEXT PRINT</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="paperfeed" onclick="paperfeed();">PAPER FEED</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="greyscal" onclick="greyscal();">GREY SCALE PRINT</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="BatteryStatus" onclick="BatteryStatus();">BATTERY STATUS</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="Diagnostics" onclick="Diagnostics();">DIAGNOSTICS</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="FirmwareVersion" onclick="FirmwareVersion();">FIRMWARE VERSION</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="Identifyperipherals" onclick="Identifyperipherals();">IDENTIFY PERIPHERALS</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="magcard" onclick="magcard();">MAG CARD</button>
+                        &nbsp;
+                        <button type="button" class="btn-primary form-control" id="Disconnect" onclick="Disconnect();">DISCONNECT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- container end -->
+   
+        <!-- footer -->
+    <footer class="navbar navbar-light" style="background-color: #428bca;">
+        <!--class="page-footer blue center-on-small-only">-->
+        <div class="footer-copyright" style="text-align:center; color:white">
+            <div class="container-fluid">
+                <h4>
+                    © 2017 Copyright: <a style="color: white"href="https://www.evolute.in"> <span style="color:white">evolute </span></a>
+                </h4>
+            </div>
+        </div>
+    </footer><!-- footer End-->
+       
+   <script type="text/javascript">
+       var template;
+       var url;
+       //var xmlDoc = document.implementation.createDocument(null, "RD");
+       /*RDs name selecting*/
+    //   function rdsname() {
+
+    //       //var i = 11100;
+    //       //for (i = 11100; i <= 11120; i++) {
+    //       //    url = "http://127.0.0.1:" + i + "/";
+    //       //}
+
+    //           var url = "http://127.0.0.1:11100/";
+    //           var xhr;
+    //           var ua = window.navigator.userAgent;
+    //           var msie = ua.indexOf("MSIE ");
+
+    //           if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+    //           {
+    //               //IE browser
+    //               xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    //           } else {
+    //               //other browser
+    //               xhr = new XMLHttpRequest();
+    //           }
+
+    //           xhr.open('RDSERVICE', url, true);
+    //           xhr.setRequestHeader("Content-Type", "text/xml");
+    //           xhr.setRequestHeader("Accept", "text/xml");
+
+    //           xhr.onreadystatechange = function () {
+
+    //               if (xhr.readyState == 4) {
+    //                   var status = xhr.status;
+
+    //                   if (status == 200) {
+    //                       console.log(xhr.response);
+    //                       console.log(xhr.responseXML);
+    //                       var xmlString = xhr.responseXML;
+    //                       var parser = new DOMParser();
+    //                       var xmlDoc = parser.parseFromXML(xmlString, "text/xml");
+    //                       var elements = xmlDoc.getElementsByTagName("RDService");
+    //                       //elements[0].appendChild(node);
+    //                       alert(xmlString);
+    //                       console.log(xmlString);
+    //                       alert(xmlDoc);
+    //                       console.log(xmlDoc);
+    //                       alert(elements);
+    //                       console.log(elements);
+
+    //                       //xml parsing
+                           
+
+
+    //                   } else {
+    //                       console.log(xhr.response);
+    //                       alert(xhr.response);
+    //                   }
+    //               }
+    //           };
+    //           xhr.send();
+           
+    //}
+
+            /*Otp registration*/
+       function Otpreg() {
+           document.getElementById('errfn').innerHTML = '';
+           document.getElementById("successMessage").innerHTML = "";
+                var url = "http://127.0.0.1:11100/rd/otp";
+                var enteredOtp = document.getElementById('Otp').value;
+                //alert(enteredOtp);
+
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (enteredOtp !== '') {
+                    document.getElementById('errfn').innerHTML = '';
+
+                    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                    {
+                        //IE browser
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    } else {
+                        //other browser
+                        xhr = new XMLHttpRequest();
+                    }
+
+                    //xhr.withCredentials = true;
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (xhr.responseText.indexOf("200") >= 0) {
+                                document.getElementById("successMessage").innerHTML = xhr.responseText;
+                                document.getElementById("errorMessage").innerHTML = "";
+                                console.log(xhr.responseText);
+                            } else {
+                                document.getElementById("errorMessage").innerHTML = xhr.responseText;
+                                document.getElementById("successMessage").innerHTML = "";
+                                console.log(xhr.responseText);
+                            }
+                        }
+                    };
+                    xhr.open('POST', url, true);
+                    xhr.send('otp=' + enteredOtp);
+                } else {
+                    document.getElementById('errfn').innerHTML = "Please Enter Token";
+                }
+            }
+
+            /*pidoptions capture*/
+            function Capture() {
+                var url = "http://127.0.0.1:11100/rd/capture";
+
+                /*Error handling for null values in the form*/
+                /*env*/
+                //if (document.getElementById('env').value == '' || document.getElementById('env').value == null) {
+                //    var env = document.getElementById('env').defaultValue = 'S';
+                //} else {
+                //    var env = document.getElementById('env').value;
+                //}
+                /*fcount*/
+                if (document.getElementById('fcount').value == '' || document.getElementById('fcount').value == null) {
+                    var fcount = document.getElementById('fcount').defaultValue = '1';
+                } else {
+                    var fcount = document.getElementById('fcount').value;
+                }
+                /*ftype*/
+                if (document.getElementById('ftype').value == '' || document.getElementById('ftype').value == null) {
+                    var ftype = document.getElementById('ftype').defaultValue = '0';
+                } else {
+                    var ftype = document.getElementById('ftype').value;
+                }
+                /*format*/
+                if (document.getElementById('format').value == '' || document.getElementById('format').value == null) {
+                    var format = document.getElementById('format').defaultValue = '0';
+                } else {
+                    var format = document.getElementById('format').value;
+                }
+                /*wadh*/
+                if (document.getElementById('wadh').value == '' || document.getElementById('wadh').value == null) {
+                    var wadh = document.getElementById('wadh').defaultValue = '';
+                } else {
+                    var wadh = document.getElementById('wadh').value;
+                }
+                /*pid version*/
+                if (document.getElementById('pidver').value == '' || document.getElementById('pidver').value == null) {
+                    var pidver = document.getElementById('pidver').defaultValue = '2.0';
+                } else {
+                    var pidver = document.getElementById('pidver').value;
+                }
+                /*otp*/
+                if (document.getElementById('otp').value == '' || document.getElementById('otp').value == null) {
+                    var otp = document.getElementById('otp').defaultValue = '';
+                } else {
+                    var otp = document.getElementById('otp').value;
+                }
+                /*timeout*/
+                if (document.getElementById('timeout').value == '' || document.getElementById('timeout').value == null) {
+                    var timeout = document.getElementById('timeout').defaultValue = '10000';
+                } else {
+                    var timeout = document.getElementById('timeout').value;
+                }
+
+                /*pid options input*/
+                var PIDOPTS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                              + '<PidOptions ver="1.0">'
+                              + '<Opts '
+                              //+ 'env="S" '
+                              //+ 'env="' + env + '" '
+                              + 'fCount="' + fcount + '" '
+                              + 'fType="' + ftype + '" '
+                              + 'iCount="" '
+                              + 'iType="" '
+                              + 'pCount="" '
+                              + 'pType="" '
+                              + 'format="' + format + '" '
+                              + 'pidVer="' + pidver + '" '
+                              + 'timeout="' + timeout + '" '
+                              + 'otp="' + otp + '" '
+                              + 'wadh="' + wadh + '" '
+                              + 'posh="UNKNOWN"/>'
+                              + '</PidOptions>';
+                alert(PIDOPTS);
+                console.log("PIDOPTS:   " + PIDOPTS);
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('CAPTURE', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            alert(xhr.responseText);
+                            console.log(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(PIDOPTS);
+            } /*pidoptions capture End*/
+
+            /*Authenticate */
+            function authenticate() {
+
+                /*aadhar no validation*/
+                if (document.getElementById('aadharno').value == '' || document.getElementById('aadharno').value == null ) {
+                    //var Usraadharno = document.getElementById('aadharno').defaultValue = '';
+                    //alert("Enter Aadhar Number");
+                    document.getElementById('uidnoerr').innerHTML = "Enter Aadhar Number";
+                    return;
+                }
+                if (document.getElementById('aadharno').value.length < 12 || document.getElementById('aadharno').value.length > 12) {
+                    document.getElementById('uidnoerr').innerHTML = "Enter Valid Aadhar Number";
+                    return;     
+                }
+                if (document.getElementById('aadharno').value.length == 12) {
+                    var Usraadharno = document.getElementById('aadharno').value;
+                    document.getElementById('uidnoerr').innerHTML = '';
+                    //alert(Usraadharno);
+                }
+
+               // var template = Capture();
+                //alert(template);
+
+                //xml parsing
+
+                //parser = new DOMParser(template);
+                //xmlDoc = parser.parseFromString(text, "text/xml");
+                //document.getElementById("").innerHTML =
+                //xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+
+                var xmlns = "http://www.uidai.gov.in/authentication/uid-auth-request/2.0"
+                var uid = Usraadharno;
+                var rc = "Y"
+                var tid = "registered"
+                var ac = "public"
+                var sa = "public"
+                var ver = "2.0"
+                var txn = ""
+                var lk = "MEaMX8fkRa6PqsqK6wGMrEXcXFl_oXHA-YuknI2uf0gKgZ80HaZgG3A"
+
+                var AUTHXML = '<Auth uid="' + uid + '" rc="' + rc + '" tid="' + tid + '" ac="' + ac + '" sa="' + sa + '" ver="' + ver + '" txn="' + txn + '" lk="' + lk + '">'
+                              + '<Uses pi="" pa="" pfa="" bio="" bt="" pin="" otp=""/>'
+                              + '<Meta udc="" rdsId="" rdsVer="" dpId="" dc="" mi="" mc="" />'
+                              + '<Skey ci=""></Skey>'
+                              + '<Hmac>SHA-256 Hash of Pid block, encrypted and then encoded</Hmac>'
+                              + '<Data type="X|P">encrypted PID block</Data>'
+                              + '<Signature>Digital signature of AUA</Signature>'
+                              + '</Auth>';
+               // alert(AUTHXML);
+
+            } /*Authenticate End*/
+
+            /*rd service*/
+            function rdservice() {
+                var url = "http://127.0.0.1:11100/";
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('RDSERVICE', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                            template = xhr.responseText;
+                        } else {
+                            console.log(xhr.response);
+                            alert(xhr.response);
+                     
+                        }
+                    }
+                };
+                xhr.send();
+            } /*rd service End*/
+
+            /*DeviceInfo*/
+            function deviceinfo() {
+                var url = "http://127.0.0.1:11100/rd/info";
+
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                } else {
+                    //other browser
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open("DEVICEINFO", url, true);
+                // xhr.withCredentials = true;
+                //xhr.setRequestHeader("SOAPAction", "http://schemas.microsoft.com/crm/2007/WebServices/Retrieve");
+                xhr.setRequestHeader("Content-Type", "text/xml; charset=utf8");
+                xhr.setRequestHeader("Accept", "text/xml");
+                xhr.setRequestHeader("Method", "CUSTOM");
+                // xhr.send(timeout);
+                xhr.onreadystatechange = function () {
+
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            alert(xhr.responseText);
+                            console.log(xhr.response);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send();
+            } /*DeviceInfo End*/
+
+            /*test print postauth*/
+            function testprint() {
+
+                var url = "http://127.0.0.1:11100/rd/postauth";
+
+                var testprintxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                + '<PostAuth txn="abc"  err="0">'
+                                + '<CustOpts>'
+                                + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                + '<Param name="Connection" value="Bluetooth"/>'
+                                + '<Param name="Module" value="TEST_PRINT"/>'
+                                + '</CustOpts>'
+                                + '</PostAuth>';
+
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(testprintxml);
+            } /*test print postauth End*/
+
+            /*text print postauth*/
+            function textprint() {
+                
+                var url = "http://127.0.0.1:11100/rd/postauth";
+
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var textprintxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                      + '<PostAuth txn="abc" err="0">'
+                                      + '<CustOpts>'
+                                      + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                      + '<Param name="Connection" value="N"/>'
+                                      + '<Param name="Module" value="TEXT_PRINT"/>'
+                                      + '<Param name="Count" value="1"/>'
+                                      + '<Param name="1" value="isOQICAgMSAgICAgICAgICAgICAgICAgICAgkGNvbm5lY3Rpb24gaXMgbm90IGxvc3QgZJB1cmluZyB0aGUgdXNhZ2Ugb2YgdGhlIEGQUElzIHN1cHBvcnRlZCBieSB0aGlzIGNsBA=="/>'
+                                      + '<Param name="2" value="isOQYXNzR29vZ2xlIGlzIG5vdCByZWxlYXNlkGQgdGhlIG5hbWUgb2YgQW5kcm9pZCA4IJAoTGF0ZXN0IEFuZHJvaWQpLiAgICAgICCQICAgMSAgICAgICAgICAgICAgICAgICAgBA=="/>'
+                                      + '<Param name="3" value="isOQY29ubmVjdGlvbiBpcyBub3QgbG9zdCBkkHVyaW5nIHRoZSB1c2FnZSBvZiB0aGUgQZBQSXMgc3VwcG9ydGVkIGJ5IHRoaXMgY2yQYXNzR29vZ2xlIGlzIG5vdCByZWxlYXNlBA=="/>'
+                                      + '<Param name="4" value="isOQZCB0aGUgbmFtZSBvZiBBbmRyb2lkIDggkChMYXRlc3QgQW5kcm9pZCkuICAgICAgIAQ="/>'
+                                      + '</CustOpts>'
+                                      + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                  
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(textprintxml);
+       } /*text print postauth End*/
+
+            /*bmp print postauth*/
+            function bmpprint() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var bmpprintxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                  + '<PostAuth txn="abc"  err="0">'
+                                  + '<CustOpts>'
+                                  + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                  + '<Param name="Connection" value="N"/>'
+                                  + '<Param name="Module" value="BMP_PRINT"/>'
+                                  + '<Param name="Count" value="9"/>'
+                                  + '<Param name="1" value="isaUzgZeMCUBXhYkAwH//14JJAMP//heCyUBXhYkAwH//14JJAMP//heCCQDBwOAJQFeFiQDAf//XgkkAw//+F4IJAMYAGAlAV4WJAMB//9eCSQDD//4XggkAzH+MCUBXhYkAwH//14JJAMP//heCCQDYYMYJQFeFiQDAf//XgkkAw//+F4IJANBhgglAV4WJAMB//9eCSQDD//4XggkA0HcCCUBXhYkAwH//14JJAMP//heCCQDYYwYJQFeFiQDAf//XgkkAw//+F4IJAMhhhAlBA=="/>'
+                                  + '<Param name="2" value="isaU3gEkBgAAA///4F4QJAMH//9eCSQOD//4AAAD///4AAAYAGAlASQDAAA/QAYkAfxeAyQBf0ALJAcAf//AAAA/QAskBYAABgGAJQEkAgABQAckAf5eAyQBf0ALJAcA///AAAA/QAskBfAAAPwAJQEkAgAPQAheA0AMJAcA///AAAA/QAskAf5eBCUBJAIAH0AIXgNADCQHAP//wAAAP0AMXgQlASQCAH9ACCQDgAABQAwkBwD//8AAAD9ADCQBwF4DJQEkAQBACSQDgAABQAwkBwD//8AAAD9ADCQB4F4DJQQ="/>'
+                                  + '<Param name="3" value="isaU5gEkAQFACSQDwAADQAwkBwD//8AAAD9ADCQB8F4DJQEkBQP//+ABQAUkA8AAA0AIJBjgAf//AP//wAAAP//gD//4A///4AB///heAyUBJAYH//8AAD9ABCQD4AAHQAQkHOAH///wAf//AP//wAAAP//gD//4B///gAAf//xeAyUBJA0P//4AAB///P//4AAHQAQkHAAAf//4Af//AP//wAAAP//gD//4B//+AAAP//5eAyUBJA0P//wAAA///D//8AAPQAMkHfwAAB///AH//wD//8AAAD//4A//+A///AAAB//+XgMlBA=="/>'
+                                  + '<Param name="4" value="isaUyAEkDR//+AAAB//+P//wAA9AAyQd8AAAD//8Af//AP//wAAAP//gD//4D//4AAAD//9eAyUBJA0f//AAAAP//h//+AAfQAMkHeAAAAf//gH//wD//8AAAD//4A//+B//+AAAA///XgMlASQNP//wAAAD//4P//gAH0ADJB3gAAAD//4B//8A///AAAA//+AP//gf//gAAAH//14DJQFeBSQIB///D//8AD9AAyQWwAAAA///Af//AP//wAAAP//gD//4H0AHXgMlBA=="/>'
+                                  + '<Param name="5" value="isaU5AFeA0AFJAUH//wAP0ADJBbAAAAB//8B//8A///AAAA//+AP//gfQAckA4AAACUBXgNABSQFA//+AH9AAyQWgAAAAf//Af//AP//wAAAP//gD//4H0AHJAOAAAAlAV4DQAUkBQP//gB/QAMkFoAAAAH//wH//wD//8AAAD//4A//+D9AByQDgAAAJQFeA0AFJB4B//8A//7//4AAAAH//wH//wD//8AAAD//4A//+D9AByQDgAAAJQFeA0AFJB4A//8A//7//4AAAAH//wH//wD//8AAAD//4A//+B9AByQDgAAAJQQ="/>'
+                                  + '<Param name="6" value="isaU2gFeA0AFJB4A//+B//z//4AAAAH//wH//wD//8AAAD//4A//+B9AB14DJQEkAz//4F4GJB9//4H//P//gAAAAf//Af//AP//wAAAP//gD//4H//4XgglASQDP//wXgYkHz//w//4f//AAAAB//8B//8A///AAAA//+AP//gf//heCCUBJAM///BeBiQfP//D//B//8AAAAP//wH//wD//8AAAD//4A//+B//+F4IJQEkAx//+F4GJB8f/+f/8H//4AAAA//+Af//AP//wAAAf//gD//4D//8XgglBA=="/>'
+                                  + '<Param name="7" value="isaUzQEkAx//+F4GJCQP/+f/4D//4AAAB//+Af//AP//wAAAf//gD//4D//8AAAB//5eAyUBJAoP//wAAAf//gAPQAMkIOA///AAAA///gH//wD//+AAAP//4A//+Af//gAAB//+XgMlASQKB//+AAAP//wAB0ADJCDAH//4AAAf//wB//8A///wAAP//+AP//gH//+AAA///l4DJQEkCgf//4AAP//4AAdAAyQgwB///gAAf//4Af//gH//+AAP///gD//4A///4AA///xeAyUE"/>'
+                                  + '<Param name="8" value="isaU0QEkCgP///gD///wAANAAyQRgA///8AD///wAf//wH///4FAAyQF4A///gFAAyQEB///+F4DJQEkAQFABiQD4AABQAMkAgAHQAYkAuABQAokAuAPQAkkAfBeAyUBJAEAQAYkA8AAAUADJAIAAUAGJALAAEAKJALgD0AJJAHgXgMlASQCAD9ABSQIgAAA///+AABABiQCgABACiQC4AdACSQBgF4DJQEkAgAfQAQkAf5eAyQGf//+AAA/QAQkBP4AAH9AByQEP//gB0AIJAH+XgQlBA=="/>'
+                                  + '<Param name="9" value="isaUqwEkAgAHQAQkAfheAyQGf//8AAAPQAQkBPgAAD9ABiQF/D//4ANACCQB+F4EJQEkAgAAQAQkAcBeAyQGP//4AAADQAQkBMAAAB9ABiQF8D//4ABACCQBwF4EJQEkBgAAH////l4EJAMf//heAyQEP////l4DJAEBQAYkBoA//+AAH0AGJAH8XgUlAV4DJAN//4BeCyQD//+AXggkAn/AXgokAg/+XgYlBl4wJQQ="/>'
+                                  + '</CustOpts>'
+                                  + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(bmpprintxml);
+            } /*bmp print postauth End*/
+
+            /*BatteryStatus print postauth*/
+            function BatteryStatus() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var Batterystatusxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                      + '<PostAuth txn="abc"  err="0">'
+                                      + '<CustOpts>'
+                                      + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                      + '<Param name="Connection" value="N"/>'
+                                      + '<Param name="Module" value="BATTERY_STATUS"/>'
+                                      + '</CustOpts>'
+                                      + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(Batterystatusxml);
+            } /*BatteryStatus postauth End*/
+
+            /*diagnostics print postauth*/
+            function Diagnostics() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var diagnostics = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                   + '<PostAuth txn="abc"  err="0">'
+                                   + '<CustOpts>'
+                                   + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                   + '<Param name="Connection" value="N"/>'
+                                   + '<Param name="Module" value="DIAGNOSTICS"/>'
+                                   + '</CustOpts>'
+                                   + '</PostAuth>';
+
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(diagnostics);
+            } /*diagnostics print postauth End*/
+
+            /*FirmwareVersion print postauth*/
+            function FirmwareVersion() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+
+                var Firmwareversion = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                 + '<PostAuth txn="abc"  err="0">'
+                                 + '<CustOpts>'
+                                 + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                 + '<Param name="Connection" value="N"/>'
+                                 + '<Param name="Module" value="FIRM_WARE_VERSION"/>'
+                                 + '</CustOpts>'
+                                 + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(Firmwareversion);
+            } /*FirmwareVersion print postauth End*/
+
+            /*greyscal print postauth*/
+            function greyscal() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var greyscalxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                  + '<PostAuth txn="abc"  err="0">'
+                                  + '<CustOpts>'
+                                  + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                  + '<Param name="Connection" value="N"/>'
+                                  + '<Param name="Module" value="GREYSCALE_PRINT"/>'
+                                  + '<Param name="Count" value="11"/>'
+                                  + '<Param name="1" value="isaU4gEkMCSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSUCXjAlASQwJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJQFeMCUBXhckApJJXgkkAwSSSF4LJQEkMCSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTf/+ySSSSSSSSSSSb//2SSSSSSSSSSSSSSSUBXhYkAwH//14JJAMP//heCCQDA02AJQFeFyQC//9eCSQDD//4XggkAwkk0CUE"/>'
+                                  + '<Param name="2" value="isaUzgEkMCSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTf/+ySSSSSSSSSSSb//2SSSSSSSSSSTT66yUBXhYkAwH//14JJAMP//heCCQDY4cQJQFeFyQC//9eCSQDD//4XggkA0GmGCUBJDAkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk3//skkkkkkkkkkkm//9kkkkkkkkkkks+kklAV4WJAMB//9eCSQDD//4XggkA2OMGCUBXgMkAkkkXhEkAwH//14JJAMP//heAyQIJJJAAABhhhAlBA=="/>'
+                                  + '<Param name="3" value="isaU1wEkMCSSSb//+SSSSSSSSSSSSSSSSSSSSSSbf/+ySSSSSSSSSSSb//2SSSb///ySSTSSaSUBJAMAAD9ABiQB/l4DJAF/QAskBwD//8AAAH9ACyQFwAAPSYAlASQCAARACF4DJAF/QAskBwD//6AAAD9ACyQF9AABtAAlASQCJJtACCQEkkkk30ALJAeyb//ySSSfQAskBf7JJJJJJQEkAgA/QAheA0AMJAcA///AAAB/QAwkAYBeAyUBJAIAP0AIJAOAAAFADCQHAP//oAAAP0AMJAHAXgMlBA=="/>'
+                                  + '<Param name="4" value="isaU0wEkAiTfQAgkA7JJJEAMJAeyb//ySSSfQAwkBPkkkkklASQBA0AJJAPAAANADCQHAP//wAAAf0AMJAHwXgMlASQFA///6CRABSQD4AADQAgkGOAA//8A//+gAAA//+AP//gH///kAn//+F4DJQEkBib//2SSb0AEJAPySSZABCQf+Sb///yTf/+yb//ySSSf/+yb//2Tf/+ySTf//ySSSSUBJA0P//4AAB///f//4AAHQAQkHAAAf//4Af//AP//wAAAf//wD//4D//+AAAP//5eAyUE"/>'
+                                  + '<Param name="5" value="isaU0QEkDQ//+AAAD//8P//wAA9AAyQd/AAAP//8AP//AP//oAAAP//gD//4B//8AAAH//5eAyUBJA03//skkk3//u//9kknQAMkIP5JJJv//5N//7Jv//JJJJ//7Jv//Zv//ZJJJv//ZJJJJQEkDR//8AAAB///H//4AB9AAyQd4AAAD//+Af//AP//wAAAf//wD//4D//4AAAD//9eAyUBJA0///AAAAP//h///AAfQAMkHeAAAAf//wD//wD//6AAAD//4A//+D//+AAAAf//XgMlBA=="/>'
+                                  + '<Param name="6" value="isaU7gEkDSSSSSSSTf//zf/+STdAAyQg8kkkk3//k3//sm//8kkkn//sm//9m///2222//9kkkklAV4DQAUkBQf//AA/QAMkFsAAAAH//wH//wD//8AAAH//8A//+B9AByQDgAAAJQFeA0AFJAWD//4Af0ADJAGAXgMkEv//AP//AP//oAAAP//gD//4P0AHXgMlASQEJJJJv0AEJAXJv/7JP0ADJBaySSSTf/+zf/+yb//ySSSf/+yb//2bQAckA+SSSSUBXgNABSQEAf//AEAEJBbAAAAB//8B//8A///AAAB///AP//g/QAckA4AAACUE"/>'
+                                  + '<Param name="7" value="isaU6wFeA0AFJAmA//+A//7//4BeAyQS//8A//8A//+gAAA//+AP//g/QAdeAyUBJAQkkkm/QAQkKMm//8m//u//skkkk3//s3//sm//8kkkn//sm//9m///2222222kkkklASQDP//wXgYkH3//g//8///AAAAB//8B//8A///AAAB///AP//gf//heCCUBJAM///BeBiQff//D//z//4AAAAH//wD//wD//6AAAD//4A//+D//+F4IJQEkMDf/+ySSSSSSSTf/3f/2b//ySSSTf/+Tf/+yb//ySSSf/+yb//2b//2SSSSSSSSSSSUE"/>'
+                                  + '<Param name="8" value="isaUyAEkAx//8F4GJB8f/+f/8H//4AAAA///Af//AP//wAAAf//wD//4D//4XgglASQtD//4AAACSSQAD//3/+A//+AAAAf//wD//wD//+AAAH//4A//+Af//AAAAbbaXgMlASQKJ///JJJN//7JJ0ADJCPyb//2SSSb//+Tf/+yb//2SSTf/+yb//2T//+SSSb//2SSSSUBJAoP//4AAB///AAHQAMkIMA///wAAB///AH//wD///AAA///8A//+Af//wAAH//+XgMlBA=="/>'
+                                  + '<Param name="9" value="isaU2wEkCg///0AAn//8AAdAAyQggB///oAAP//4AP//gP///AAP///gD//4A///4AB///5eAyUBJAom///8k3//9kkmQAMkI7JN///ZJv///JN///Jv///tv///7Jv//5N////tv//7JJJJJQEkAQFABiQD4AADQAMkAgAHQAYkAvABQAokAvAPQAkkAfBeAyUBJAEBQAYkA+AAAUADJAIAA0AGJALAAEAKJALgB0AJJAHQXgMlASQCJJ9ABSQJskkk3///kkm/QAUkA+SSf0AJJALsk0AJJATZJJJJJQQ="/>'
+                                  + '<Param name="10" value="isaU3wEkAgAPQAQkAf5eAyQGf//+AAB/QAQkBP4AAH9AByQEP//wB0AJXgQlASQCAAdABCQB+F4DJAY///wAAA9ABCQE+AAAP0AGJAX9P//gB0AIJAH0XgQlASQDJJJvQAMkCuSSSSSf//2SSSZABCQE2SSSTUAGJAb8n//skm9AByQF8kkkkkklASQGAAA////+XgQkAz//+F4DJAR////9XgMkAQZABiQGwD//4AA/QAYkAf5eBSUBJAYAAAJv9pBeCiQEBN/9oF4EJAYJJJJJNtJeBSQIAkkkkkkm2kBeBSUE"/>'
+                                  + '<Param name="11" value="isaUcAEkMCSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSUCXjAlASQwJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJQJeMCUE"/>'
+                                  + '</CustOpts>'
+                                  + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            alert(xhr.responseText);
+                            console.log(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(greyscalxml);
+            } /*greyscal print postauth End*/
+
+            /*Identifyperipherals postauth*/
+            function Identifyperipherals() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var Identifyperipheral = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                          + '<PostAuth txn="abc"  err="0">'
+                                          + '<CustOpts>'
+                                          + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                          + '<Param name="Connection" value="N"/>'
+                                          + '<Param name="Module" value="IDENTIFY_PERIPHERALS"/>'
+                                          + '</CustOpts>'
+                                          + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(Identifyperipheral);
+            } /*Identifyperipherals postauth End*/
+
+            /*magcard postauth*/
+            function magcard() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var magcardxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                  + '<PostAuth txn="abc"  err="0">'
+                                  + '<CustOpts>'
+                                  + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                  + '<Param name="Connection" value="N"/>'
+                                  + '<Param name="Module" value="MAGCARD"/>'
+                                  + '<Param name="Timeout" value="10000"/>'
+                                  + '</CustOpts>'
+                                  + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(magcardxml);
+            } /*magcard postauth End*/
+
+            /*paperfeed postauth*/
+            function paperfeed() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var paperfeedxml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                  + '<PostAuth txn="abc"  err="0">'
+                                  + '<CustOpts>'
+                                  + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                  + '<Param name="Connection" value="N"/>'
+                                  + '<Param name="Module" value="PAPERFEED"/>'
+                                  + '</CustOpts>'
+                                  + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(paperfeedxml);
+            } /*paperfeed postauth End*/
+
+            /*DISCONNECT postauth*/
+            function Disconnect() {
+                var url = "http://127.0.0.1:11100/rd/postauth";
+                //var textprintinput = document.getElementById('txtprintip').value;
+                //var txtprintipencoded = window.btoa(textprintinput);
+                //alert(txtprintipencoded);
+                var DisconnectXML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+                                      + '<PostAuth txn="abc"  err="0">'
+                                      + '<CustOpts>'
+                                      + '<Param name="ESYS04650" value="00:04:3E:97:B9:08"/>'
+                                      + '<Param name="Connection" value="N"/>'
+                                      + '<Param name="Module" value="DISCONNECTED"/>'
+                                      + '</CustOpts>'
+                                      + '</PostAuth>';
+                var xhr;
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+                {
+                    //IE browser
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } else {
+                    //other browser
+                    //test();
+                    xhr = new XMLHttpRequest();
+                }
+
+                xhr.open('POSTAUTH', url, true);
+                xhr.setRequestHeader("Content-Type", "text/xml");
+                xhr.setRequestHeader("Accept", "text/xml");
+
+                xhr.onreadystatechange = function () {
+                    //if(xhr.readyState == 1 && count == 0){
+                    //	fakeCall();
+                    //}
+                    if (xhr.readyState == 4) {
+                        var status = xhr.status;
+
+                        if (status == 200) {
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                        } else {
+                            console.log(xhr.response);
+                        }
+                    }
+                };
+                xhr.send(DisconnectXML);
+            } /*DISCONNECT postauth End*/
+
+            function barcodeprint() {
+                var barcode = new iPrintBarcode1();
+                alert(barcode);
+            }
+
+
+        </script>
+</body>
+</html>

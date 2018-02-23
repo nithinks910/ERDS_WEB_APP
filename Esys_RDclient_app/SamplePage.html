@@ -1,0 +1,172 @@
+<html>
+<head>
+</head>
+<body>
+    <form name="cart"></form>
+    <h2>The XMLHttpRequest Object</h2>
+
+    <button type="button" onclick="loadDoc()">Direct RD Device Info</button>
+    <button type="button" onclick="CaptureRD()">Direct RD Capture</button>
+    <button type="button" onclick="GetFingerPrintDetails()">Middle Layer Capture</button>
+    
+    <p id="demo"></p>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        function loadDoc() {
+            var url = "https://127.0.0.1:11100/rd/info";
+            //var url = "https://www.smartchiponline.com:11100/getDeviceInfo";
+
+            debugger;
+            var xhr;
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+            {
+                //IE browser
+		//xhr = new ActiveXObject("Microsoft.XMLHTTP");
+xhr = new ActiveXObject("Msxml2.XMLHTTP");
+
+            } else {
+                //other browser
+                xhr = new XMLHttpRequest();
+            }
+
+            //
+            xhr.open('DEVICEINFO', url, true);
+
+            xhr.onreadystatechange = function () {
+                // if(xhr.readyState == 1 && count == 0){
+                //	fakeCall();
+                //}
+                if (xhr.readyState == 4) {
+                    var status = xhr.status;
+
+                    if (status == 200) {
+
+                        alert(xhr.responseText);
+
+                        console.log(xhr.response);
+
+                    } else {
+
+                        console.log(xhr.response);
+
+                    }
+                }
+
+            };
+
+            xhr.send();
+        }
+
+        function CaptureRD() {
+            var url = "https://127.0.0.1:11100/rd/capture";
+            // var url = "https://www.smartchiponline.com:11100/capture";
+            var PIDOPTS = '<PidOptions ver=\"1.0\">' + '<Opts fCount=\"1\" fType=\"0\" iCount=\"\" iType=\"\" pCount=\"\" pType=\"\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" wadh=\"\" posh=\"\"/>' + '</PidOptions>';
+            /*
+            format=\"0\"     --> XML
+            format=\"1\"     --> Protobuf
+            */
+            var xhr;
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) // If Internet Explorer, return version number
+            {
+                //IE browser
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            } else {
+                //other browser
+                xhr = new XMLHttpRequest();
+            }
+
+            xhr.open('CAPTURE', url, true);
+            xhr.setRequestHeader("Content-Type", "text/xml");
+            xhr.setRequestHeader("Accept", "text/xml");
+
+            xhr.onreadystatechange = function () {
+                //if(xhr.readyState == 1 && count == 0){
+                //	fakeCall();
+                //}
+                if (xhr.readyState == 4) {
+                    var status = xhr.status;
+
+                    if (status == 200) {
+                        alert(xhr.responseText);
+                        //if(xhr.responseText.indexOf("errCode=\"100\"") != -1){
+                        //alert(xhr.responseText);
+                        //fakeCall();
+                        //Capture();
+                        //}else{
+                        //    alert(xhr.responseText);
+                        //    console.log(xhr.response);
+                        //}
+                    } else {
+
+                        console.log(xhr.response);
+
+                    }
+                }
+
+            };
+
+            xhr.send(PIDOPTS);
+
+        }
+
+
+
+        //function CaptureRD() {
+        //    var xhttp = new XMLHttpRequest();
+        //    xhttp.onreadystatechange = function () {
+        //        if (this.readyState == 4 && this.status == 200) {
+        //            alert(this.responseText);
+        //        }
+        //    };
+        //    xhttp.open("CAPTURE", "http://127.0.0.1:11100/rd/capture", true);
+        //    xhttp.setRequestHeader('Access-Control-Allow-Origin', "*");
+        //    xhttp.setRequestHeader("Content-Type", "text/xml");
+        //    xhttp.setRequestHeader("Accept", "text/xml");
+        //    xhttp.send("<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"\" format=\"0\" pidVer=\"2.0\" timeout=\"0\" env=\"PP\" wadh=\"\" posh=\"\"/></PidOptions>");
+        //}
+
+        function GetFingerPrintDetails() {
+            
+            var url = "https://localhost:8989/Values/GetPID";
+            var xmlhttp;
+            //var template;
+            var EncryptedData;
+            var timeout = 10;
+
+            var Certificate = "-----BEGIN CERTIFICATE-----MIIB6jCCAVOgAwIBAgIQLlePu9tAVI9DkZehY/oXTjANBgkqhkiG9w0BAQUFADAfMR0wGwYDVQQDExRJVC5QYXlwb2ludGluZGlhLmNvbTAeFw0xNzA0MTAwODA3MjdaFw00NDA4MjUwODA3MjdaMB8xHTAbBgNVBAMTFElULlBheXBvaW50aW5kaWEuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgCKMBx0JGgM3n+mB7LynK6lYihLpP0V1y2AyX379VDeaaBOSWZfHGbsLUzwqTil1zzlw1Zj2eeyN6/XfVwlo4VcFB3ox3KYbLkPq1kXssnPcP9cDvF4nKAtrT8Ll1RxoGDckSbnDjKDav8aJ2b2wbEDv6CX8SMzRGvXOjWBMTAwIDAQABoycwJTATBgNVHSUEDDAKBggrBgEFBQcDATAOBgNVHQ8EBwMFALAAAAAwDQYJKoZIhvcNAQEFBQADgYEAJT7DK82KG5wEbXkyA6n5u3kaFRGYLG/hVRQ85k2XC8BwHdotcYmi7oXw1I4GKxrXO/BhfDNFdZfoXjdOv4t/V3/q/7S2G9lvdl7guodFdDzjptZ8p3LvxYG3qxAqRODpQ6KKvwr7n7gkgKvSFnuvi1f7J3xcKoJjvidy5ZACqtk=-----END CERTIFICATE-----";
+
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.open("POST", url, true);
+            xmlhttp.withCredentials = true;
+            xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf8");
+            xmlhttp.setRequestHeader("Accept", "application/json");
+            xmlhttp.setRequestHeader("Method", "POST");
+            xmlhttp.send(JSON.stringify(timeout + "|" + Certificate));
+
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    alert(xmlhttp.responseText);
+                    alert("Finger prints captured!");
+                }
+                xmlhttp.onerror = function () {
+                    alert("Check If Evolute Service/Utility is Running");
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

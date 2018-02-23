@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>E:\IIS Hosted\ERDS_Web_App</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>12/28/2015 21:38:26</publishTime>
+    </File>
+    <File Include="bin/Esys_RDclient_app.dll">
+      <publishTime>02/22/2018 12:48:50</publishTime>
+    </File>
+    <File Include="bin/Esys_RDclient_app.pdb">
+      <publishTime>02/22/2018 12:48:50</publishTime>
+    </File>
+    <File Include="bin/Printer.dll">
+      <publishTime>12/12/2017 16:03:07</publishTime>
+    </File>
+    <File Include="bin/Security.Cryptography.dll">
+      <publishTime>11/14/2014 17:28:28</publishTime>
+    </File>
+    <File Include="bin/serverUrlListener.dll">
+      <publishTime>12/13/2017 15:37:55</publishTime>
+    </File>
+    <File Include="bin/serverUrlListener.pdb">
+      <publishTime>12/13/2017 15:37:55</publishTime>
+    </File>
+    <File Include="bin/Staging_Signature_PrivateKey.p12">
+      <publishTime>02/22/2018 12:45:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-theme.css">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-theme.css.map">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-theme.min.css">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-theme.min.css.map">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.css">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.css.map">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.min.css">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.min.css.map">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.js">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.min.js">
+      <publishTime>01/19/2018 14:52:40</publishTime>
+    </File>
+    <File Include="bootstrap/js/npm.js">
+      <publishTime>01/19/2018 14:52:41</publishTime>
+    </File>
+    <File Include="eKYC.aspx">
+      <publishTime>12/04/2017 15:08:20</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>01/22/2018 18:06:18</publishTime>
+    </File>
+    <File Include="OnlyEsmallwhite.ico">
+      <publishTime>11/16/2017 09:56:46</publishTime>
+    </File>
+    <File Include="Properties/DataSources/System.Data.DataSet.datasource">
+      <publishTime>01/22/2018 17:05:38</publishTime>
+    </File>
+    <File Include="rdsweb.html">
+      <publishTime>11/17/2017 12:30:27</publishTime>
+    </File>
+    <File Include="Sample.aspx">
+      <publishTime>02/22/2018 12:39:14</publishTime>
+    </File>
+    <File Include="SamplePage.html">
+      <publishTime>10/04/2017 12:35:27</publishTime>
+    </File>
+    <File Include="Staging_Signature_PrivateKey.p12">
+      <publishTime>02/22/2018 12:45:40</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/22/2018 12:40:34</publishTime>
+    </File>
+    <File Include="WebService1.asmx">
+      <publishTime>12/13/2017 11:16:59</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
